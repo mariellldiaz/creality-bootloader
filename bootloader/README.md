@@ -1,4 +1,4 @@
-# Test App
+# Bootloader
 
 This is the actual bootloader, it has to be flashed using a JLINK or similar and the SWD port.
 
