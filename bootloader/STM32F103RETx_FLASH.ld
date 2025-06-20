@@ -61,11 +61,11 @@ _Min_Stack_Size = 0x400; /* required amount of stack */
 /* Specify the memory areas */
 MEMORY
 {
-RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 64K;
-FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 0x0B34;
-ROOT_META (rw)  : ORIGIN = 0x08000B34, LENGTH = 584;
-TARGET_META (rw) : ORIGIN = 0x08000CE4, LENGTH = 204;
-APP_FLASH (xrw) : ORIGIN = 0x08007000, LENGTH = 0x79000;
+RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 64K
+FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 0x0B34
+ROOT_META (rw)  : ORIGIN = 0x08000B34, LENGTH = 584
+TARGET_META (rw) : ORIGIN = 0x08000CE4, LENGTH = 204
+APP_FLASH (xrw) : ORIGIN = 0x08007000, LENGTH = 0x79000
 }
 
 __app_flash_start__ = ORIGIN(APP_FLASH);
@@ -149,7 +149,7 @@ SECTIONS
 
     . = ALIGN(4);
     _edata = .;        /* define a global symbol at data end */
-  } > RAM AT > FLASH
+  } > RAM AT (FLASH)
 
   
   /* Uninitialized data section */
