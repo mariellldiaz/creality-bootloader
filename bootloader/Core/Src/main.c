@@ -150,14 +150,14 @@ int main(void)
   MX_USART1_Init();
   /* USER CODE BEGIN 2 */
 
-  erase_conf.PageAddress = &__app_flash_start__;
+  erase_conf.PageAddress = __app_flash_start__;
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  uint32_t *app_code = &__app_flash_start__;
+  uint32_t *app_code = __app_flash_start__;
   uint32_t app_sp = app_code[0];
   uint32_t app_start = app_code[1];
 
@@ -218,7 +218,7 @@ int main(void)
       }
       HAL_USART_Transmit(&husart1, (uint8_t*) "Writing next buffer to flash\n", sizeof("Writing next buffer to flash\n"), 1000);
       for (int i = 0; i < bytes_read / 4; i++) {
-        hr = HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, &__app_flash_start__ + buffers_read * 128 + 1 * i, ((uint32_t*)read_buff)[i]);
+        hr = HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, __app_flash_start__ + buffers_read * 128 + 1 * i, ((uint32_t*)read_buff)[i]);
         if (hr) {
           HAL_USART_Transmit(&husart1, (uint8_t*) "Failed writing to flash\n", sizeof("Failed writing to flash\n"), 1000);
           HAL_USART_Transmit(&husart1, (uint8_t*) "Entering infinite loop\n", sizeof("Entering infinite loop\n"), 1000);
@@ -229,7 +229,7 @@ int main(void)
         for (int i = 0; i < bytes_read % 4; i++) {
           read_buff[bytes_read + i] = 0xFF;
         }
-        hr = HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, &__app_flash_start__ + buffers_read * 128 + 1 * (bytes_read / 4), ((uint32_t*)read_buff)[bytes_read / 4]);
+        hr = HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, __app_flash_start__ + buffers_read * 128 + 1 * (bytes_read / 4), ((uint32_t*)read_buff)[bytes_read / 4]);
         if (hr) {
           HAL_USART_Transmit(&husart1, (uint8_t*) "Failed final step writing to flash\n", sizeof("Failed final step writing to flash\n"), 1000);
           HAL_USART_Transmit(&husart1, (uint8_t*) "Entering infinite loop\n", sizeof("Entering infinite loop\n"), 1000);
@@ -263,7 +263,7 @@ int main(void)
     HAL_USART_Transmit(&husart1, (uint8_t*) "Everything seems to have worked...\n", sizeof("Everything seems to have worked...\n"), 1000);
     HAL_USART_Transmit(&husart1, (uint8_t*) "Jumping to new app...\n", sizeof("Jumping to new app...\n"), 1000);
     // while (1) {}
-    SCB->VTOR = &__app_flash_start__;
+    SCB->VTOR = __app_flash_start__;
     start_app(app_start, app_sp);
 
     // fr = f_open(&fil, "test.txt", FA_READ);
