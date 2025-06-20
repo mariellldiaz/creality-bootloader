@@ -96,7 +96,7 @@ static void start_app(uint32_t pc, uint32_t sp) __attribute__((naked));
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-extern int __app_flash_start__;
+extern int uint32_t __app_flash_start__;
 extern int __app_flash_size__;
 
 // static uint8_t tx_buff[] = "Hello, World!";
