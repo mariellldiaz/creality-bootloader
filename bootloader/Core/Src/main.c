@@ -150,14 +150,14 @@ int main(void)
   MX_USART1_Init();
   /* USER CODE BEGIN 2 */
 
-  erase_conf.PageAddress = __app_flash_start__;
+  erase_conf.PageAddress = &__app_flash_start__;
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  uint32_t *app_code = (uint32_t *)__app_flash_start__;
+  uint32_t *app_code = &__app_flash_start__;
   uint32_t app_sp = app_code[0];
   uint32_t app_start = app_code[1];
 
